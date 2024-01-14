@@ -1,5 +1,5 @@
 {
-	"name": "@vabgalimov/begemot-bot",
+	"name": "@asyomei/begemot-bot",
 	"version": "0.0.1",
 	"scripts": {
 		"start": "ts-node --transpile-only src/main.ts",
