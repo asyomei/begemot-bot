@@ -1,0 +1,33 @@
+{
+  "name": "@vabgalimov/begemot-bot",
+  "version": "0.0.1",
+  "scripts": {
+    "start": "ts-node --transpile-only src/main.ts",
+    "test": "tsc -b",
+    "ts-run": "ts-node --transpile-only"
+  },
+  "dependencies": {
+    "@grammyjs/auto-retry": "^1.1.1",
+    "@grammyjs/ratelimiter": "^1.2.0",
+    "@grammyjs/runner": "^2.0.3",
+    "@grammyjs/transformer-throttler": "^1.2.1",
+    "@messageformat/core": "^3.3.0",
+    "dotenv": "^16.3.1",
+    "envalid": "^8.0.0",
+    "glob": "^10.3.10",
+    "grammy": "^1.20.3",
+    "ts-node": "^10.9.2",
+    "yaml": "^2.3.4"
+  },
+  "devDependencies": {
+    "@trivago/prettier-plugin-sort-imports": "^4.3.0",
+    "@types/node": "^20.11.0",
+    "prettier": "^3.2.2",
+    "typescript": "^5.3.3"
+  },
+  "pnpm": {
+    "overrides": {
+      "whatwg-url": "13.0.0"
+    }
+  }
+}
