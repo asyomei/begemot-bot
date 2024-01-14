@@ -5,8 +5,8 @@ const comp = new Composer<MyContext>()
 export default comp
 
 comp.on("callback_query", async (ctx) => {
-  const { data } = ctx.callbackQuery
-  console.log(`Callback query with data "${data}" hasn't been handled`)
+	const { data } = ctx.callbackQuery
+	console.log(`Callback query with data "${data}" hasn't been handled`)
 
-  await ctx.answerCallbackQuery()
+	await ctx.answerCallbackQuery()
 })

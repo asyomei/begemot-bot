@@ -1,19 +1,19 @@
 {
-  "compilerOptions": {
-    "noFallthroughCasesInSwitch": true,
-    "noUncheckedIndexedAccess": true,
-    "strict": true,
-    "module": "commonjs",
-    "moduleResolution": "node",
-    "esModuleInterop": true,
-    "noEmit": true,
-    "allowJs": true,
-    "checkJs": true,
-    "target": "es2022",
-    "incremental": true,
-    "disableReferencedProjectLoad": true,
-    "disableSolutionSearching": true,
-    "skipLibCheck": true
-  },
-  "exclude": ["**/node_modules/", "**/dist/"]
+	"compilerOptions": {
+		"noFallthroughCasesInSwitch": true,
+		"noUncheckedIndexedAccess": true,
+		"strict": true,
+		"module": "commonjs",
+		"moduleResolution": "node",
+		"esModuleInterop": true,
+		"noEmit": true,
+		"allowJs": true,
+		"checkJs": true,
+		"target": "es2022",
+		"incremental": true,
+		"disableReferencedProjectLoad": true,
+		"disableSolutionSearching": true,
+		"skipLibCheck": true
+	},
+	"exclude": ["**/node_modules/", "**/dist/"]
 }

@@ -5,5 +5,5 @@ const comp = new Composer<MyContext>()
 export default comp
 
 comp.on("message:text").command("start", async (ctx) => {
-  await ctx.reply(ctx.i18n.t("start.text"))
+	await ctx.reply(ctx.i18n.t("start.text"))
 })
