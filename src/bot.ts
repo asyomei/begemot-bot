@@ -4,6 +4,6 @@ import { MyContext } from "./types/context"
 
 export const bot = new Bot<MyContext>(env.BOT_TOKEN)
 
-bot.catch(({ error }) => {
-	console.error(String(error))
+bot.catch(({ stack }) => {
+	console.error(stack)
 })
