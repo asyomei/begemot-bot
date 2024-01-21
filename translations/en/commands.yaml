@@ -1,2 +1,6 @@
 start:
   names: [start]
+
+help:
+  names: [help, commands]
+  description: Show Begemot's possibilities
