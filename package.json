@@ -13,7 +13,7 @@
 		"@grammyjs/runner": "^2.0.3",
 		"@grammyjs/transformer-throttler": "^1.2.1",
 		"@messageformat/core": "^3.3.0",
-		"dotenv": "^16.3.1",
+		"dotenv": "^16.3.2",
 		"envalid": "^8.0.0",
 		"glob": "^10.3.10",
 		"grammy": "^1.20.3",
@@ -21,8 +21,8 @@
 		"yaml": "^2.3.4"
 	},
 	"devDependencies": {
-		"@biomejs/biome": "^1.5.1",
-		"@types/node": "^20.11.0",
+		"@biomejs/biome": "^1.5.2",
+		"@types/node": "^20.11.5",
 		"typescript": "^5.3.3"
 	},
 	"pnpm": {
