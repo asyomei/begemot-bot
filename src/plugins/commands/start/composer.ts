@@ -1,11 +1,12 @@
 import { Composer } from "grammy"
-import { MyContext } from "../../../types/context"
+import { commandT } from "#/filters/command-t"
+import { MyContext } from "#/types/context"
 import { compMiddleware } from "../_utils"
 import { StartController } from "./controller"
 
 export class StartComposer {
 	constructor(private startController: StartController) {
-		this.comp.command("start", this.start.bind(this))
+		this.comp.filter(commandT("start"), this.start.bind(this))
 	}
 
 	async start(ctx: MyContext) {

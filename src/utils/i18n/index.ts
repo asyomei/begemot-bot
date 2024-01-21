@@ -56,3 +56,11 @@ function expand(res: any, opts: TOptions): any {
 	if (Array.isArray(res)) return res.map((f) => f(opts))
 	return mapValues(res, (x) => expand(x, opts))
 }
+
+export class I18nNotFoundError extends Error {
+	constructor(lng: Lang, path: string | string[], what = "resource") {
+		lng ??= fallbackLng
+		const key = Array.isArray(path) ? path.join(".") : path
+		super(`Not found ${what} with key "${lng}:${key}"`)
+	}
+}
