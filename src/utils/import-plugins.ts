@@ -46,7 +46,7 @@ async function fetchAllFiles(cwd: string): Promise<string[]> {
 		posix: true,
 	})
 
-	return files.map((file) => basename(file, ".ts"))
+	return files.map((file) => basename(file.replace("/index.ts", ""), ".ts"))
 }
 
 async function readUseTxt(cwd: string): Promise<string[]> {

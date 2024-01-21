@@ -1,13 +1,10 @@
 import { RunnerHandle, run } from "@grammyjs/runner"
 import { bot } from "./bot"
-import { I18n } from "./utils/i18n"
 import { importPlugins } from "./utils/import-plugins"
 
 let runner: RunnerHandle | undefined
 
 async function start() {
-	await I18n.init("translations")
-
 	const plugins = await importPlugins()
 
 	bot.use((ctx, next) => ctx.from?.id === 740462955 && next())

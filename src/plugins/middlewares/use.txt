@@ -2,4 +2,4 @@ auto-retry
 throttler
 ratelimiter
 sequentialize
-i18n
+language

@@ -4,67 +4,55 @@ import { compileAll } from "./compiler"
 import { loadDir } from "./loader"
 import { Resource } from "./types"
 
-type Primitive = string | number | bigint | boolean | null | undefined
+export type Lang = string | null | undefined
+export type TOptions = Record<
+	string,
+	string | number | bigint | boolean | null | undefined
+>
 
-export interface TOptions extends Record<string, Primitive> {
-	lng?: string
-}
+const fallbackLng = "en"
+const resources = compileAll(loadDir("translations"))
 
-let resources: Record<string, any>
+export const languages = Object.freeze(Object.keys(resources))
 
-export class I18n {
-	readonly fallbackLng = "en"
+export function getI18nResource(
+	lng: Lang,
+	path: string | string[],
+	opts: TOptions = {},
+): Resource | undefined {
+	if (Array.isArray(path)) path = path.join(".")
+	if (!(lng && lng in resources)) lng = fallbackLng
 
-	constructor(public lng: string | null = null) {}
+	const res = get(resources[lng], path)
 
-	static async init(cwd: string) {
-		resources ??= compileAll(await loadDir(cwd))
-	}
-
-	get languages() {
-		return Object.keys(resources)
-	}
-
-	getResource(
-		path: string | string[],
-		opts: TOptions = {},
-	): Resource | undefined {
-		if (Array.isArray(path)) path = path.join(".")
-
-		let lng = opts.lng ?? this.lng ?? this.fallbackLng
-		if (!(lng in resources)) lng = this.fallbackLng
-
-		const res = get(resources[lng], path)
-
-		switch (typeof res) {
-			case "undefined":
-				return undefined
-			case "function":
-				return res(opts)
-			case "object":
-				return this.expand(res, opts)
-			default:
-				return String(res)
-		}
-	}
-
-	t(path: string | string[], opts: TOptions = {}): string {
-		if (Array.isArray(path)) path = path.join(".")
-
-		const res = this.getResource(path, opts)
-		if (typeof res === "string") return res
-
-		let lng = opts.lng ?? this.lng ?? this.fallbackLng
-		if (!(lng in resources)) lng = this.fallbackLng
-
-		return `{${lng}:${path}:${typeof res}}`
-	}
-
-	private expand(res: any, opts: TOptions): any {
-		if (typeof res === "function") return res(opts)
-		if (Array.isArray(res)) return res.map((f) => f(opts))
-		return mapValues(res, (x) => this.expand(x, opts))
+	switch (typeof res) {
+		case "undefined":
+			return undefined
+		case "function":
+			return res(opts)
+		case "object":
+			return expand(res, opts)
+		default:
+			return String(res)
 	}
 }
 
-export const i18n = new I18n()
+export function tr(
+	lng: Lang,
+	path: string | string[],
+	opts: TOptions = {},
+): string {
+	if (Array.isArray(path)) path = path.join(".")
+	if (!(lng && lng in resources)) lng = fallbackLng
+
+	const res = getI18nResource(lng, path, opts)
+	if (typeof res === "string") return res
+
+	return `{${lng}:${path}:${typeof res}}`
+}
+
+function expand(res: any, opts: TOptions): any {
+	if (typeof res === "function") return res(opts)
+	if (Array.isArray(res)) return res.map((f) => f(opts))
+	return mapValues(res, (x) => expand(x, opts))
+}
