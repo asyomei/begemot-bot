@@ -26,7 +26,8 @@ async function importSubPlugins(dir: string) {
 
 	const unused = files.filter((file) => !used.includes(file))
 	if (unused.length) {
-		throw new Error(`Unused files at ${cwd}: ${unused.join(" ")}`)
+		const path = join(cwd, "use.txt")
+		throw new Error(`Unused files at ${path}: ${unused.join(" ")}`)
 	}
 
 	return new Composer<MyContext>(
