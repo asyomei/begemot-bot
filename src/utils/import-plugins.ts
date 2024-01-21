@@ -2,7 +2,7 @@ import { basename, join } from "path"
 import { readFile, readdir } from "fs/promises"
 import { glob } from "glob"
 import { Composer } from "grammy"
-import { MyContext } from "../types/context"
+import { MyContext } from "#/types/context"
 
 export async function importPlugins() {
 	const cwd = join(__dirname, "..", "plugins")

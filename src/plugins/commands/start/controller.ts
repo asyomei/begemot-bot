@@ -1,4 +1,4 @@
-import { Lang, tr } from "../../../utils/i18n"
+import { Lang, tr } from "#/utils/i18n"
 
 export class StartController {
 	start(lng: Lang) {

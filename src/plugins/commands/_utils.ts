@@ -1,5 +1,5 @@
 import { MiddlewareFn } from "grammy"
-import { MyContext } from "../../types/context"
+import { MyContext } from "#/types/context"
 
 interface CustomComposer<C extends MyContext> {
 	middleware(): MiddlewareFn<C>

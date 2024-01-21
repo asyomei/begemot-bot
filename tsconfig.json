@@ -5,6 +5,9 @@
 		"strict": true,
 		"module": "commonjs",
 		"moduleResolution": "node",
+		"paths": {
+			"#/*": ["./src/*"]
+		},
 		"esModuleInterop": true,
 		"noEmit": true,
 		"allowJs": true,
@@ -17,7 +20,8 @@
 		"skipLibCheck": true
 	},
 	"ts-node": {
-		"swc": true
+		"swc": true,
+		"require": ["tsconfig-paths/register"]
 	},
 	"exclude": ["**/node_modules/", "**/dist/"]
 }

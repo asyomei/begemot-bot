@@ -1,5 +1,5 @@
 import { Context } from "grammy"
-import { Lang } from "../utils/i18n"
+import { Lang } from "#/utils/i18n"
 
 export type MyContext = Context & LangFlavor
 
