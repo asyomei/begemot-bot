@@ -5,12 +5,12 @@ import { compMiddleware } from "../_utils"
 import { HelpController } from "./controller"
 
 export class HelpComposer {
-	constructor(private helpController: HelpController) {
+	constructor(private con: HelpController) {
 		this.comp.filter(commandT("help"), this.help.bind(this))
 	}
 
 	async help(ctx: MyContext) {
-		await ctx.reply(this.helpController.help(ctx.lng))
+		await ctx.reply(this.con.help(ctx.lng))
 	}
 
 	private comp = new Composer<MyContext>().on("message:text")
