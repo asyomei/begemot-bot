@@ -1,5 +1,6 @@
 import { RunnerHandle, run } from "@grammyjs/runner"
 import { bot } from "./bot"
+import { botCommands } from "./consts/bot-commands"
 import { importPlugins } from "./utils/import-plugins"
 
 let runner: RunnerHandle | undefined
@@ -9,6 +10,12 @@ async function start() {
 
 	bot.use((ctx, next) => ctx.from?.id === 740462955 && next())
 	bot.use(plugins)
+
+	await Promise.all(
+		botCommands.map(([lng, commands]) =>
+			bot.api.setMyCommands(commands, { language_code: lng }),
+		),
+	)
 
 	runner = run(bot, {
 		runner: {
