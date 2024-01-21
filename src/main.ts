@@ -1,6 +1,7 @@
 import { RunnerHandle, run } from "@grammyjs/runner"
 import { bot } from "./bot"
 import { botCommands } from "./consts/bot-commands"
+import { prisma } from "./prisma"
 import { importPlugins } from "./utils/import-plugins"
 
 let runner: RunnerHandle | undefined
@@ -35,6 +36,8 @@ const exit = async () => {
 	if (runner?.isRunning()) {
 		await runner.stop()
 	}
+
+	await prisma.$disconnect()
 }
 
 process.once("SIGINT", exit)

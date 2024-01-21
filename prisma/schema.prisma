@@ -1,0 +1,21 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  rowid     Int      @id @default(autoincrement()) @db.UnsignedInt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  id        BigInt  @unique
+  firstName String  @db.VarChar(64)
+  lastName  String? @db.VarChar(64)
+  username  String? @unique @db.VarChar(32)
+  language  String? @db.VarChar(16)
+  isBot     Boolean
+}

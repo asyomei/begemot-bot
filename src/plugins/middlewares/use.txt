@@ -2,4 +2,5 @@ auto-retry
 throttler
 ratelimiter
 sequentialize
+database-sync
 language

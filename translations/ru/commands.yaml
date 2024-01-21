@@ -4,3 +4,7 @@ start:
 help:
   names: [помощь, команды]
   description: Показать возможности Бегемота
+
+language:
+  names: [язык]
+  description: Сменить язык

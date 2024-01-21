@@ -4,3 +4,7 @@ start:
 help:
   names: [help, commands]
   description: Show Begemot's possibilities
+
+language:
+  names: [language]
+  description: Change the language

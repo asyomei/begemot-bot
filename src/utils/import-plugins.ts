@@ -42,7 +42,7 @@ async function importSubPlugins(dir: string) {
 async function fetchAllFiles(cwd: string): Promise<string[]> {
 	const files = await glob(["*.ts", "*/index.ts"], {
 		cwd,
-		ignore: "_*",
+		ignore: "_*/**",
 		nodir: true,
 		posix: true,
 	})

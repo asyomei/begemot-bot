@@ -10,9 +10,9 @@ export type TOptions = Record<
 	string | number | bigint | boolean | null | undefined
 >
 
-const fallbackLng = "en"
 const resources = compileAll(loadDir("translations"))
 
+export const fallbackLng = "en"
 export const languages = Object.freeze(Object.keys(resources))
 
 export function getI18nResource(
