@@ -11,9 +11,13 @@
 		"checkJs": true,
 		"target": "es2022",
 		"incremental": true,
+		"tsBuildInfoFile": ".tsbuildinfo",
 		"disableReferencedProjectLoad": true,
 		"disableSolutionSearching": true,
 		"skipLibCheck": true
+	},
+	"ts-node": {
+		"swc": true
 	},
 	"exclude": ["**/node_modules/", "**/dist/"]
 }
