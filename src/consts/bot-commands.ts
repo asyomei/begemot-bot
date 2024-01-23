@@ -1,4 +1,7 @@
 import { defineBotCommands } from "#/utils/bot-commands"
 
 // Also add commands to help text
-export const botCommands = defineBotCommands(["help", "language"], ["start"])
+export const botCommands = defineBotCommands(
+	["help", "language", "balance"],
+	["start"],
+)

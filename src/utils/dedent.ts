@@ -12,7 +12,12 @@ export function dedent(
 	const [text] = params as [string]
 
 	const [first, ...lines] = text.trim().split("\n")
-	const offset = Math.min(...lines.slice(1).map(countLeadingSpaces))
+	const offset = Math.min(
+		...lines
+			.slice(1)
+			.filter((s) => s.trim())
+			.map(countLeadingSpaces),
+	)
 
 	return [first, ...lines.map((s) => s.slice(offset))].join("\n")
 }

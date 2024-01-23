@@ -8,3 +8,7 @@ help:
 language:
   names: [язык]
   description: Сменить язык
+
+balance:
+  names: [баланс]
+  description: Узнать баланс

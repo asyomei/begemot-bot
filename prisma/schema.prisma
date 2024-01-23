@@ -18,4 +18,6 @@ model User {
   username  String? @unique @db.VarChar(32)
   language  String? @db.VarChar(16)
   isBot     Boolean
+
+  coins BigInt @default(0) @db.UnsignedBigInt
 }
