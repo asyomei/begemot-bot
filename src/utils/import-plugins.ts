@@ -40,17 +40,24 @@ async function importSubPlugins(dir: string) {
 }
 
 async function fetchAllFiles(cwd: string): Promise<string[]> {
-	const files = await glob(["*.ts", "*/index.ts"], {
+	const files = await glob(["*.{ts,js}", "*/index.{ts,js}"], {
 		cwd,
 		ignore: "_*/**",
 		nodir: true,
 		posix: true,
 	})
 
-	return files.map((file) => basename(file.replace("/index.ts", ""), ".ts"))
+	return files.map((file) => basename(removeIndexExt(file)))
 }
 
 async function readUseTxt(cwd: string): Promise<string[]> {
 	const data = await readFile(join(cwd, "use.txt"), "utf-8")
 	return data.split(/\s/g).filter(Boolean)
+}
+
+function removeIndexExt(path: string) {
+	let idx = path.lastIndexOf("/index.")
+	if (idx === -1) idx = path.lastIndexOf(".")
+	if (idx === -1) return path
+	return path.slice(0, idx)
 }
