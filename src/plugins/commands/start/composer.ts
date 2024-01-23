@@ -1,18 +1,21 @@
 import { Composer } from "grammy"
 import { commandT } from "#/filters/command-t"
 import { MyContext } from "#/types/context"
-import { compMiddleware } from "../_utils"
 import { StartController } from "./controller"
 
+export interface StartComposerDeps {
+	controller: StartController
+}
+
 export class StartComposer {
-	constructor(private con: StartController) {
+	constructor(private deps: StartComposerDeps) {
 		this.comp.filter(commandT("start"), this.start.bind(this))
 	}
 
 	async start(ctx: MyContext) {
-		await ctx.reply(this.con.start(ctx.lng))
+		await ctx.reply(this.deps.controller.start(ctx.lng))
 	}
 
 	private comp = new Composer<MyContext>().on("message:text")
-	middleware = compMiddleware(this.comp)
+	middleware = () => this.comp.middleware()
 }

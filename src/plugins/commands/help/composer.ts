@@ -1,18 +1,21 @@
 import { Composer } from "grammy"
 import { commandT } from "#/filters/command-t"
 import { MyContext } from "#/types/context"
-import { compMiddleware } from "../_utils"
 import { HelpController } from "./controller"
 
+export interface HelpComposerDeps {
+	controller: HelpController
+}
+
 export class HelpComposer {
-	constructor(private con: HelpController) {
+	constructor(private deps: HelpComposerDeps) {
 		this.comp.filter(commandT("help"), this.help.bind(this))
 	}
 
 	async help(ctx: MyContext) {
-		await ctx.reply(this.con.help(ctx.lng))
+		await ctx.reply(this.deps.controller.help(ctx.lng))
 	}
 
 	private comp = new Composer<MyContext>().on("message:text")
-	middleware = compMiddleware(this.comp)
+	middleware = () => this.comp.middleware()
 }

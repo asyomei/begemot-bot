@@ -4,8 +4,12 @@ import { CallbackData } from "#/utils/callback-data"
 import { languages, tr } from "#/utils/i18n"
 import { LanguageService } from "./service"
 
+export interface LanguageControllerDeps {
+	service: LanguageService
+}
+
 export class LanguageController {
-	constructor(private service: LanguageService) {}
+	constructor(private deps: LanguageControllerDeps) {}
 
 	language(userId: number, curLng: string): [string, InlineKeyboardButton[][]] {
 		const buttons = languages.map((lng) => [
@@ -19,7 +23,7 @@ export class LanguageController {
 	}
 
 	async changeLanguage(userId: number, lng: string) {
-		await this.service.changeLanguage(userId, lng)
+		await this.deps.service.changeLanguage(userId, lng)
 
 		return tr(lng, "language.changed")
 	}
