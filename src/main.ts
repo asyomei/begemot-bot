@@ -12,11 +12,19 @@ async function start() {
 	bot.use((ctx, next) => ctx.from?.id === 740462955 && next())
 	bot.use(plugins)
 
-	await Promise.all(
-		botCommands.map(([lng, commands]) =>
-			bot.api.setMyCommands(commands, { language_code: lng }),
-		),
-	)
+	if (process.argv.includes("--set-commands")) {
+		await Promise.all(
+			botCommands.map(([lng, commands]) =>
+				bot.api.setMyCommands(commands, { language_code: lng }),
+			),
+		)
+		console.log("Commands are set")
+	}
+
+	if (process.argv.includes("--skip-updates")) {
+		await bot.api.deleteWebhook({ drop_pending_updates: true })
+		console.log("Updates skipped")
+	}
 
 	runner = run(bot, {
 		runner: {
