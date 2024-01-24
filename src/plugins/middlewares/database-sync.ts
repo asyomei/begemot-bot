@@ -1,28 +1,38 @@
 import { NextFunction } from "grammy"
+import { User } from "grammy/types"
 import { prisma } from "#/prisma"
 import { MyContext } from "#/types/context"
 
 export default async (ctx: MyContext, next: NextFunction) => {
 	if (ctx.from) {
-		await prisma.user.upsert({
-			select: { id: true },
-			where: { id: ctx.from.id },
-			update: {
-				firstName: ctx.from.first_name,
-				lastName: ctx.from.last_name,
-				username: ctx.from.username,
-				messages: ctx.message && { increment: 1 },
-			},
-			create: {
-				id: ctx.from.id,
-				firstName: ctx.from.first_name,
-				lastName: ctx.from.last_name,
-				username: ctx.from.username,
-				isBot: ctx.from.is_bot,
-				language: ctx.from.language_code,
-			},
-		})
+		await syncUser(ctx.from, !!ctx.message)
+	}
+
+	const replyUser = ctx.msg?.reply_to_message?.from
+	if (replyUser) {
+		await syncUser(replyUser)
 	}
 
 	await next()
+}
+
+async function syncUser(from: User, incrementMessages?: boolean) {
+	await prisma.user.upsert({
+		select: { id: true },
+		where: { id: from.id },
+		update: {
+			firstName: from.first_name,
+			lastName: from.last_name,
+			username: from.username,
+			messages: incrementMessages ? { increment: 1 } : undefined,
+		},
+		create: {
+			id: from.id,
+			firstName: from.first_name,
+			lastName: from.last_name,
+			username: from.username,
+			isBot: from.is_bot,
+			language: from.language_code,
+		},
+	})
 }
