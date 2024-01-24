@@ -9,7 +9,9 @@ export interface BalanceComposerDeps {
 
 export class BalanceComposer {
 	constructor(private deps: BalanceComposerDeps) {
-		this.comp.filter(commandT("balance"), this.balance.bind(this))
+		this.comp
+			.on("message:text")
+			.filter(commandT("balance"), this.balance.bind(this))
 	}
 
 	async balance(ctx: Filter<MyContext, "message:text">) {
@@ -18,6 +20,6 @@ export class BalanceComposer {
 		await ctx.reply(text)
 	}
 
-	private comp = new Composer<MyContext>().on("message:text")
+	private comp = new Composer<MyContext>()
 	middleware = () => this.comp.middleware()
 }

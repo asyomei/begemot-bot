@@ -9,13 +9,13 @@ export interface HelpComposerDeps {
 
 export class HelpComposer {
 	constructor(private deps: HelpComposerDeps) {
-		this.comp.filter(commandT("help"), this.help.bind(this))
+		this.comp.on("message:text").filter(commandT("help"), this.help.bind(this))
 	}
 
 	async help(ctx: MyContext) {
 		await ctx.reply(this.deps.controller.help(ctx.lng))
 	}
 
-	private comp = new Composer<MyContext>().on("message:text")
+	private comp = new Composer<MyContext>()
 	middleware = () => this.comp.middleware()
 }

@@ -9,13 +9,15 @@ export interface StartComposerDeps {
 
 export class StartComposer {
 	constructor(private deps: StartComposerDeps) {
-		this.comp.filter(commandT("start"), this.start.bind(this))
+		this.comp
+			.on("message:text")
+			.filter(commandT("start"), this.start.bind(this))
 	}
 
 	async start(ctx: MyContext) {
 		await ctx.reply(this.deps.controller.start(ctx.lng))
 	}
 
-	private comp = new Composer<MyContext>().on("message:text")
+	private comp = new Composer<MyContext>()
 	middleware = () => this.comp.middleware()
 }
