@@ -11,7 +11,7 @@ export default async (ctx: MyContext, next: NextFunction) => {
 				firstName: ctx.from.first_name,
 				lastName: ctx.from.last_name,
 				username: ctx.from.username,
-				messages: { increment: ctx.message && 1 },
+				messages: ctx.message && { increment: 1 },
 			},
 			create: {
 				id: ctx.from.id,
