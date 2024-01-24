@@ -1,0 +1,5 @@
+delay: You can change user ratings no more often than one minute
+changed: "{name}'s rating has been changed, now its rating is: {rating} ⭐"
+
+good: [thank you, thanks, thx, ty, plus]
+bad: [minus]
