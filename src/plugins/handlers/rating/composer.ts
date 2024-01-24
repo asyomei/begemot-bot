@@ -1,6 +1,7 @@
 import { Composer, Filter } from "grammy"
 import { HasReplyUserFiltered, hasReplyUser } from "#/filters/has-reply-user"
 import { hearsT } from "#/filters/hears-t"
+import { autoReply } from "#/middlewares/auto-reply"
 import { MyContext } from "#/types/context"
 import { BAD_RE, GOOD_RE } from "./consts"
 import { RatingController } from "./controller"
@@ -15,6 +16,7 @@ export class RatingComposer {
 			.on("message:text")
 			.filter(hasReplyUser)
 			.filter((ctx) => ctx.from.id !== ctx.replyUser.id)
+			.use(autoReply)
 
 		comp.hears(GOOD_RE, (ctx) => this.rating(ctx, 1))
 		comp.hears(BAD_RE, (ctx) => this.rating(ctx, -1))

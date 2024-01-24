@@ -1,5 +1,6 @@
 import { Composer, Filter } from "grammy"
 import { commandT } from "#/filters/command-t"
+import { autoReply } from "#/middlewares/auto-reply"
 import { MyContext } from "#/types/context"
 import { BalanceController } from "./controller"
 
@@ -11,7 +12,7 @@ export class BalanceComposer {
 	constructor(private deps: BalanceComposerDeps) {
 		this.comp
 			.on("message:text")
-			.filter(commandT("balance"), this.balance.bind(this))
+			.filter(commandT("balance"), autoReply, this.balance.bind(this))
 	}
 
 	async balance(ctx: Filter<MyContext, "message:text">) {

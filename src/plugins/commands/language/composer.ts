@@ -1,5 +1,6 @@
 import { Composer, Filter } from "grammy"
 import { commandT } from "#/filters/command-t"
+import { autoReply } from "#/middlewares/auto-reply"
 import { MyContext } from "#/types/context"
 import { fallbackLng } from "#/utils/i18n"
 import { LanguageController } from "./controller"
@@ -12,7 +13,7 @@ export class LanguageComposer {
 	constructor(private deps: LanguageComposerDeps) {
 		this.comp
 			.on("message:text")
-			.filter(commandT("language"), this.language.bind(this))
+			.filter(commandT("language"), autoReply, this.language.bind(this))
 
 		this.comp.callbackQuery(
 			deps.controller.cbData.filter(),

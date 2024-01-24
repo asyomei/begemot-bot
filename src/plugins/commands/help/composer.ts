@@ -1,5 +1,6 @@
 import { Composer } from "grammy"
 import { commandT } from "#/filters/command-t"
+import { autoReply } from "#/middlewares/auto-reply"
 import { MyContext } from "#/types/context"
 import { HelpController } from "./controller"
 
@@ -9,7 +10,9 @@ export interface HelpComposerDeps {
 
 export class HelpComposer {
 	constructor(private deps: HelpComposerDeps) {
-		this.comp.on("message:text").filter(commandT("help"), this.help.bind(this))
+		this.comp
+			.on("message:text")
+			.filter(commandT("help"), autoReply, this.help.bind(this))
 	}
 
 	async help(ctx: MyContext) {

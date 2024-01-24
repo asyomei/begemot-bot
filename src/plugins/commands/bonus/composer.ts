@@ -1,5 +1,6 @@
 import { Composer, Filter } from "grammy"
 import { commandT } from "#/filters/command-t"
+import { autoReply } from "#/middlewares/auto-reply"
 import { MyContext } from "#/types/context"
 import { BonusController } from "./controller"
 
@@ -11,7 +12,7 @@ export class BonusComposer {
 	constructor(private deps: BonusComposerDeps) {
 		this.comp
 			.on("message:text")
-			.filter(commandT("bonus"), this.bonus.bind(this))
+			.filter(commandT("bonus"), autoReply, this.bonus.bind(this))
 
 		this.comp.callbackQuery(
 			deps.controller.cbData.filter(),
