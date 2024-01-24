@@ -2,6 +2,7 @@ import { RunnerHandle, run } from "@grammyjs/runner"
 import { bot } from "./bot"
 import { botCommands } from "./consts/bot-commands"
 import { prisma } from "./prisma"
+import { redis } from "./redis"
 import { importPlugins } from "./utils/import-plugins"
 
 let runner: RunnerHandle | undefined
@@ -26,6 +27,9 @@ async function start() {
 		console.log("Updates skipped")
 	}
 
+	await prisma.$connect()
+	await redis.connect()
+
 	runner = run(bot, {
 		runner: {
 			fetch: {
@@ -45,6 +49,7 @@ const exit = async () => {
 		await runner.stop()
 	}
 
+	await redis.quit()
 	await prisma.$disconnect()
 }
 
