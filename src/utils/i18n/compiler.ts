@@ -1,4 +1,5 @@
 import MessageFormat from "@messageformat/core"
+import { escapeHTML } from "../escape-html"
 import { mapValues } from "../map-values"
 import { Resource } from "./types"
 
@@ -6,7 +7,16 @@ export function compileAll(
 	resources: Record<string, Record<string, Resource>>,
 ) {
 	return mapValues(resources, (res, lng) => {
-		const mf = new MessageFormat(lng)
+		const mf = new MessageFormat(lng, {
+			customFormatters: {
+				nohtml: {
+					formatter(value) {
+						return escapeHTML(String(value))
+					},
+				},
+			},
+		})
+
 		return _compile(mf.compile.bind(mf), res)
 	})
 }
