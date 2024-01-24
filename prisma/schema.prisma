@@ -19,5 +19,6 @@ model User {
   language  String? @db.VarChar(16)
   isBot     Boolean
 
-  coins BigInt @default(0) @db.UnsignedBigInt
+  messages Int    @default(0) @db.UnsignedInt
+  coins    BigInt @default(0) @db.UnsignedBigInt
 }
