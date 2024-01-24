@@ -12,3 +12,7 @@ language:
 balance:
   names: [balance]
   description: Find out the balance
+
+bonus:
+  names: [bonus]
+  description: Get coins

@@ -1,0 +1,18 @@
+delay: "{delay, duration} left until bonus"
+
+no-attempts: Attempts left
+already-opened: This cell is already opened
+
+text: |-
+  🪙 <b>Bonus game</b> 🪙
+
+  <b>User:</b> {name, nohtml}
+  {attempts, plural,
+    =0 {Attempts left}
+    =1 {<b>One more</b> attempt left}
+    one {# attempt left}
+    other {# attempts left}
+  }
+
+  <b>You got:</b> {lastIncome} 🪙
+  <b>Total you got:</b> {incomeTotal} 🪙

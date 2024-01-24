@@ -2,3 +2,4 @@ start
 help
 language
 balance
+bonus

@@ -12,3 +12,7 @@ language:
 balance:
   names: [баланс]
   description: Узнать баланс
+
+bonus:
+  names: [бонус]
+  description: Получить монетки
