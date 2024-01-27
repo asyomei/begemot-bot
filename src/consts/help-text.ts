@@ -8,3 +8,7 @@ export const helpText = build`
 
   ${cmd("language")} - ${desc("language")}
 `
+
+export const adminHelpText = build`
+  ${cmd("admin.stats")} - ${desc("admin.stats")}
+`

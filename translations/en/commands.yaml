@@ -18,6 +18,9 @@ bonus:
   description: Get coins
 
 admin:
+  help:
+    names: [admin]
+
   stats:
     names: [stats, info]
     description: Get Begemot's statistics
