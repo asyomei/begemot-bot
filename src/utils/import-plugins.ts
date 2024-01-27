@@ -4,25 +4,34 @@ import { glob } from "glob"
 import { Composer } from "grammy"
 import { MyContext } from "#/types/context"
 
-export async function importPlugins() {
-	const cwd = join(__dirname, "..", "plugins")
-	const dirs = (await readdir(cwd)).filter((s) => s !== "use.txt")
-	const used = await readUseTxt(cwd)
+const pluginsDir = join(__dirname, "..", "plugins")
 
-	const unused = dirs.filter((dir) => !used.includes(dir))
+export async function importPlugins(dir?: string, used?: string[]) {
+	const cwd = dir ? join(pluginsDir, dir) : pluginsDir
+	const dirs = (await readdir(cwd)).filter((s) => s !== "use.txt")
+	used ??= await readUseTxt(cwd)
+
+	const unused = dirs.filter(
+		(dir) => !used!.some((usedDir) => usedDir.endsWith(dir)),
+	)
 	if (unused.length) {
-		throw new Error(`Unused directories at ${cwd}: ${unused.join(" ")}`)
+		const path = join(cwd, "use.txt")
+		throw new Error(`Unused directories at ${path}: ${unused.join(" ")}`)
 	}
 
-	return new Composer<MyContext>(
-		...(await Promise.all(used.map(importSubPlugins))),
-	)
+	const subPlugins = await Promise.all(used.map(importSubPlugins))
+	return new Composer<MyContext>(...subPlugins)
 }
 
-async function importSubPlugins(dir: string) {
-	const cwd = join(__dirname, "..", "plugins", dir)
+async function importSubPlugins(dir: string): Promise<Composer<MyContext>> {
+	const cwd = join(pluginsDir, dir)
 	const files = await fetchAllFiles(cwd)
 	const used = await readUseTxt(cwd)
+
+	if (!files.length && used.length) {
+		const subUsed = used.map((usedDir) => join(dir, usedDir))
+		return await importPlugins(dir, subUsed)
+	}
 
 	const unused = files.filter((file) => !used.includes(file))
 	if (unused.length) {
@@ -30,13 +39,11 @@ async function importSubPlugins(dir: string) {
 		throw new Error(`Unused files at ${path}: ${unused.join(" ")}`)
 	}
 
-	return new Composer<MyContext>(
-		...(await Promise.all(
-			used
-				.map((name) => `../plugins/${dir}/${name}`)
-				.map((path) => import(path).then((mod) => mod.default)),
-		)),
+	const paths = used.map((name) => `../plugins/${dir}/${name}`)
+	const middlewares = await Promise.all(
+		paths.map((path) => import(path).then((mod) => mod.default)),
 	)
+	return new Composer<MyContext>(...middlewares)
 }
 
 async function fetchAllFiles(cwd: string): Promise<string[]> {
@@ -52,7 +59,7 @@ async function fetchAllFiles(cwd: string): Promise<string[]> {
 
 async function readUseTxt(cwd: string): Promise<string[]> {
 	const data = await readFile(join(cwd, "use.txt"), "utf-8")
-	return data.split(/\s/g).filter(Boolean)
+	return data.split(/\s+/g).filter(Boolean)
 }
 
 function removeIndexExt(path: string) {

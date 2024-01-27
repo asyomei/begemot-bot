@@ -16,3 +16,8 @@ balance:
 bonus:
   names: [бонус]
   description: Получить монетки
+
+admin:
+  stats:
+    names: [статистика, инфо]
+    description: Показать статистику Бегемота

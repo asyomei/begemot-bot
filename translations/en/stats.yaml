@@ -1,0 +1,6 @@
+text: |-
+  Begemot is used by:
+  - {users, plural,
+    one {# user}
+    other {# users}
+  }
