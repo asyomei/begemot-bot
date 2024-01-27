@@ -1,3 +1,4 @@
+drop-sender-chat
 auto-retry
 throttler
 ratelimiter
