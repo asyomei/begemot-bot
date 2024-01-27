@@ -1,6 +1,7 @@
 {
 	"name": "@asyomei/begemot-bot",
 	"version": "0.0.1",
+	"license": "MIT",
 	"scripts": {
 		"build": "node build.js",
 		"dist": "node --enable-source-maps dist/main.js",
