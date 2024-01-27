@@ -2,13 +2,14 @@
 	"name": "@asyomei/begemot-bot",
 	"version": "0.0.1",
 	"license": "MIT",
+	"private": "true",
 	"scripts": {
 		"build": "node build.js",
 		"dist": "node --enable-source-maps dist/main.js",
 		"start": "ts-node src/main.ts",
 		"dev": "nodemon --signal SIGHUP src/main.ts",
 		"test": "tsc -b && pnpm run check && jest",
-		"check": "biome check --apply src",
+		"check": "biome check --apply src"
 	},
 	"dependencies": {
 		"@grammyjs/auto-retry": "^1.1.1",
