@@ -21,6 +21,11 @@ profile:
   names: [profile]
   description: Get your profile
 
+transfer:
+  names: [transfer]
+  args: [coins, user tag|id|in reply to message]
+  description: Transfer coins to another user
+
 admin:
   help:
     names: [admin]

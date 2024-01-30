@@ -1,0 +1,13 @@
+missing-user: There is no user with this data
+
+not-enough: |-
+  There are not enough coins to transfer!
+
+  <b>Needed:</b> {amount} 🪙
+  <b>Your balance:</b> {coins} 🪙
+
+complete: |-
+  {fromName} <b>successfully</b> transferred {toName} {amount} 🪙
+
+  {fromName}'s balance: {fromCoins} 🪙
+  {toName}'s balance: {toCoins} 🪙

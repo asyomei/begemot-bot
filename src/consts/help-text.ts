@@ -1,10 +1,12 @@
-import { build, cmd, desc, msg } from "#/utils/help-text"
+import { args, build, cmd, desc, msg } from "#/utils/help-text"
 
 export const helpText = build`
   ${msg("help.header")}
 
   ${cmd("bonus")} - ${desc("bonus")}
   ${cmd("balance")} - ${desc("balance")}
+
+  ${cmd("transfer")} ${args("transfer")} - ${desc("transfer")}
 
   ${cmd("profile")} - ${desc("profile")}
 
