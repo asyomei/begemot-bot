@@ -17,5 +17,10 @@
 	"module": {
 		"type": "commonjs"
 	},
+	"exclude": [
+		"\\.spec\\.",
+		"\\.type\\.",
+		"types/"
+	],
 	"sourceMaps": true
 }
