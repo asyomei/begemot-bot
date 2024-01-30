@@ -6,7 +6,7 @@ const {
 	rmSync,
 	writeFileSync,
 } = require("fs")
-const { join } = require("path")
+const { join, relative } = require("path")
 
 const files = readdirSync("./src", {
 	encoding: "utf-8",
@@ -25,12 +25,17 @@ for (const file of files) {
 
 	const path = join(file.path, file.name)
 	if (file.name.endsWith(".ts") || file.name.endsWith(".js")) {
-		const js = transformFileSync(path)
+		const js = transformFileSync(path, {
+			sourceFileName: relative(outpath, path),
+		})
 		const name = withoutExt(file.name)
 
-		writeFileSync(join(outpath, `${name}.js`), js.code)
 		if (js.map) {
+			const link = `//# sourceMappingURL=${name}.js.map`
+			writeFileSync(join(outpath, `${name}.js`), js.code + link)
 			writeFileSync(join(outpath, `${name}.js.map`), js.map)
+		} else {
+			writeFileSync(join(outpath, `${name}.js`), js.code)
 		}
 	} else {
 		copyFileSync(path, join(outpath, file.name))
