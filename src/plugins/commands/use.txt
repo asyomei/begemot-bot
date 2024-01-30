@@ -3,3 +3,4 @@ help
 language
 balance
 bonus
+profile

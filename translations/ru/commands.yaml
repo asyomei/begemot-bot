@@ -17,6 +17,10 @@ bonus:
   names: [бонус]
   description: Получить монетки
 
+profile:
+  names: [профиль]
+  description: Показать ваш профиль
+
 admin:
   help:
     names: [админ]

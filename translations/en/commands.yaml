@@ -17,6 +17,10 @@ bonus:
   names: [bonus]
   description: Get coins
 
+profile:
+  names: [profile]
+  description: Get your profile
+
 admin:
   help:
     names: [admin]
