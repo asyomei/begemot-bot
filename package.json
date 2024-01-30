@@ -4,7 +4,7 @@
 	"license": "MIT",
 	"private": "true",
 	"scripts": {
-		"build": "del-cli dist && swc src --strip-leading-paths -Dd dist",
+		"build": "del-cli dist && swc src --strip-leading-paths -Dd dist --ignore **/*.spec.*",
 		"dist": "node --enable-source-maps dist/main.js",
 		"start": "ts-node src/main.ts",
 		"dev": "nodemon --signal SIGHUP src/main.ts",
