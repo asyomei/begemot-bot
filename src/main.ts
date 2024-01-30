@@ -8,11 +8,6 @@ import { importPlugins } from "./utils/import-plugins"
 let runner: RunnerHandle | undefined
 
 async function start() {
-	const plugins = await importPlugins()
-
-	bot.use((ctx, next) => ctx.from?.id === 740462955 && next())
-	bot.use(plugins)
-
 	if (process.argv.includes("--set-commands")) {
 		await Promise.all(
 			botCommands.map(([lng, commands]) =>
@@ -26,6 +21,14 @@ async function start() {
 		await bot.api.deleteWebhook({ drop_pending_updates: true })
 		console.log("Updates skipped")
 	}
+
+	if (process.argv.includes("--exit")) {
+		console.log("Exitted")
+		return
+	}
+
+	bot.use((ctx, next) => ctx.from?.id === 740462955 && next())
+	bot.use(await importPlugins())
 
 	await prisma.$connect()
 	await redis.connect()
