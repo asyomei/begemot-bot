@@ -23,8 +23,8 @@ export class BonusComposer {
 
 	async bonus(ctx: Filter<MyContext, "message:text">) {
 		const [text, buttons] = await this.deps.controller.bonus(
-			ctx.from.id,
 			ctx.lng,
+			ctx.from.id,
 		)
 
 		await ctx.reply(text, {
@@ -37,9 +37,9 @@ export class BonusComposer {
 		const { pos } = this.deps.controller.cbData.unpack(ctx.callbackQuery.data)
 
 		const [text, buttons] = await this.deps.controller.bonusField(
+			ctx.lng,
 			ctx.from.id,
 			pos,
-			ctx.lng,
 		)
 
 		await ctx.answerCallbackQuery(buttons ? undefined : text)

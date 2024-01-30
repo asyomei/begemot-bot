@@ -1,6 +1,6 @@
+import { memoize } from "lodash"
 import { dedent } from "./dedent"
 import { I18nNotFoundError, Lang, getI18nResource, tr } from "./i18n"
-import { memoize } from "./memoize"
 
 type StringFunction = (lng: Lang) => string
 

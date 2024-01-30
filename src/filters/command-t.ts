@@ -1,7 +1,6 @@
 import { Context } from "grammy"
-import { compact } from "../utils/compact"
+import { compact, memoize } from "lodash"
 import { I18nNotFoundError, getI18nResource, languages } from "../utils/i18n"
-import { memoize } from "../utils/memoize"
 
 export interface CommandTFiltered {
 	commandArgs: string[]
@@ -42,8 +41,7 @@ const getCommandChecks = memoize((key: string) => {
 			if (!Array.isArray(commands) || commands.length === 0) return null
 
 			return (msgCmd: string) => {
-				const prefix = ["/", "!"].find((prefix) => msgCmd.startsWith(prefix))
-
+				const prefix = ["/", "!"].find((p) => msgCmd.startsWith(p))
 				return !!prefix && commands.some((cmd) => msgCmd === prefix + cmd)
 			}
 		}),

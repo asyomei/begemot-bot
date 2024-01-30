@@ -1,13 +1,22 @@
-import { Redis } from "#/redis"
-import { compactStrict } from "#/utils/compact"
-import { omit } from "#/utils/omit"
+import { isNil, omit, omitBy } from "lodash"
+
+export interface RedisClient {
+	get(key: string): Promise<string | null | undefined>
+	set(
+		key: string,
+		value: string,
+		options: { KEEPTTL: true } | { EX: number },
+	): Promise<unknown>
+	expire(key: string, seconds: number): Promise<boolean>
+	ttl(key: string): Promise<number>
+}
 
 export type Expire = { expire?: number }
 
 export class RedisStorage<T extends { [x: string]: any }> {
 	constructor(
 		readonly name: string,
-		private redis: Redis,
+		private redis: RedisClient,
 	) {}
 
 	async get(args: {
@@ -34,7 +43,7 @@ export class RedisStorage<T extends { [x: string]: any }> {
 			expire = args.update.expire
 			data = {
 				...(session as T),
-				...omit(compactStrict(args.update), ["expire"]),
+				...omit(omitBy(args.update, isNil), ["expire"]),
 			}
 		} else {
 			expire = args.create.expire
@@ -56,7 +65,7 @@ export class RedisStorage<T extends { [x: string]: any }> {
 		const expire = args.data.expire
 		const data = {
 			...(JSON.parse(source) as T),
-			...omit(compactStrict(args.data), ["expire"]),
+			...omit(omitBy(args.data, isNil), ["expire"]),
 		}
 
 		return await this.set(args.id, data, expire)

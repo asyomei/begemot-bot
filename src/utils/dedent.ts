@@ -1,3 +1,5 @@
+import { trim } from "lodash/fp"
+
 export function dedent(text: string): string
 export function dedent(template: TemplateStringsArray, ...args: any[]): string
 export function dedent(
@@ -13,10 +15,7 @@ export function dedent(
 
 	const [first, ...lines] = text.trim().split("\n")
 	const offset = Math.min(
-		...lines
-			.slice(1)
-			.filter((s) => s.trim())
-			.map(countLeadingSpaces),
+		...lines.slice(1).filter(trim).map(countLeadingSpaces),
 	)
 
 	return [first, ...lines.map((s) => s.slice(offset))].join("\n")

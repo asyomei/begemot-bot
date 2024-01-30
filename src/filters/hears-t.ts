@@ -1,6 +1,6 @@
+import { memoize } from "lodash"
 import { MyContext } from "#/types/context"
 import { I18nNotFoundError, getI18nResource, languages } from "#/utils/i18n"
-import { memoize } from "#/utils/memoize"
 
 export interface HearsTFiltered {
 	triggerArgs: string[]

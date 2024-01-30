@@ -1,8 +1,9 @@
 import { CallbackQueryContext, MiddlewareFn } from "grammy"
+import { mapValues } from "lodash"
+import { eq } from "lodash/fp"
 import { MyContext } from "#/types/context"
 import { Simplify } from "#/types/simplify"
 import { tr } from "./i18n"
-import { mapValues } from "./map-values"
 
 type Id = string | number | bigint
 type Schema = Record<string, (s: string) => any>
@@ -37,7 +38,7 @@ export class CallbackData<T extends "public" | "private", S extends Schema> {
 		const raws = data.split(DEL).at(-1)!.split(PAYLOAD_SEP).slice(1)
 		const iter = raws[Symbol.iterator]()
 
-		return mapValues(this.schema, (f) => f(iter.next().value)) as From<S>
+		return mapValues(this.schema, (f) => f(iter.next().value))
 	}
 
 	filter(data: Partial<From<S>> = {}): RegExp {
@@ -54,7 +55,7 @@ export class CallbackData<T extends "public" | "private", S extends Schema> {
 			if (!data.includes(DEL)) return await next()
 
 			const ids = data.split(DEL)[0]!.split(ID_SEP).map(Number)
-			if (ids.some((id) => ctx.from.id === id)) return await next()
+			if (ids.some(eq(ctx.from.id))) return await next()
 
 			await ctx.answerCallbackQuery(tr(ctx.lng, "common.wrong-button"))
 		}

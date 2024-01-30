@@ -1,8 +1,8 @@
 import { InlineKeyboard } from "grammy"
 import { InlineKeyboardButton } from "grammy/types"
+import { chunk } from "lodash"
 import { RandomService } from "#/services/random"
 import { CallbackData } from "#/utils/callback-data"
-import { chunk } from "#/utils/chunk"
 import { Lang, tr } from "#/utils/i18n"
 import {
 	CLOSED_ITEM,
@@ -23,8 +23,8 @@ export class BonusController {
 	constructor(private deps: BonusControllerDeps) {}
 
 	async bonus(
-		userId: number,
 		lng: Lang,
+		userId: number,
 	): Promise<[string, InlineKeyboardButton[][]?]> {
 		const session = await this.deps.service.getSession(userId, {
 			attempts: MAX_ATTEMPTS,
@@ -53,9 +53,9 @@ export class BonusController {
 	}
 
 	async bonusField(
+		lng: Lang,
 		userId: number,
 		pos: number,
-		lng: Lang,
 	): Promise<[string, InlineKeyboardButton[][]?]> {
 		const session = await this.deps.service.getSession(userId)
 		if (!session || session.attempts <= 0) {

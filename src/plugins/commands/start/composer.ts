@@ -10,9 +10,9 @@ export interface StartComposerDeps {
 
 export class StartComposer {
 	constructor(private deps: StartComposerDeps) {
-		this.comp
-			.on("message:text")
-			.filter(commandT("start"), autoReply, this.start.bind(this))
+		const comp = this.comp.on("message:text")
+
+		comp.filter(commandT("start"), autoReply, this.start.bind(this))
 	}
 
 	async start(ctx: MyContext) {

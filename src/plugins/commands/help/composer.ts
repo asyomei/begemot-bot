@@ -10,9 +10,9 @@ export interface HelpComposerDeps {
 
 export class HelpComposer {
 	constructor(private deps: HelpComposerDeps) {
-		this.comp
-			.on("message:text")
-			.filter(commandT("help"), autoReply, this.help.bind(this))
+		const comp = this.comp.on("message:text")
+
+		comp.filter(commandT("help"), autoReply, this.help.bind(this))
 	}
 
 	async help(ctx: MyContext) {

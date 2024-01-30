@@ -10,9 +10,9 @@ export interface BalanceComposerDeps {
 
 export class BalanceComposer {
 	constructor(private deps: BalanceComposerDeps) {
-		this.comp
-			.on("message:text")
-			.filter(commandT("balance"), autoReply, this.balance.bind(this))
+		const comp = this.comp.on("message:text")
+
+		comp.filter(commandT("balance"), autoReply, this.balance.bind(this))
 	}
 
 	async balance(ctx: Filter<MyContext, "message:text">) {

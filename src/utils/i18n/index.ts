@@ -1,14 +1,11 @@
-import { get } from "../get"
-import { mapValues } from "../map-values"
+import { get, mapValues } from "lodash"
 import { compileAll } from "./compiler"
 import { loadDir } from "./loader"
 import { Resource } from "./types"
 
 export type Lang = string | null | undefined
-export type TOptions = Record<
-	string,
-	string | number | bigint | boolean | null | undefined
->
+export type TOptionValue = string | number | bigint | boolean | null | undefined
+export type TOptions = Record<string, TOptionValue>
 
 const resources = compileAll(loadDir("translations"))
 

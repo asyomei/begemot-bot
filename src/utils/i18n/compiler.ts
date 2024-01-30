@@ -1,6 +1,6 @@
 import MessageFormat from "@messageformat/core"
+import { mapValues } from "lodash"
 import { escapeHTML } from "../escape-html"
-import { mapValues } from "../map-values"
 import { Resource } from "./types"
 
 export function compileAll(

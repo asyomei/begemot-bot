@@ -2,18 +2,17 @@ import { basename, join } from "path"
 import { readFile, readdir } from "fs/promises"
 import { glob } from "glob"
 import { Composer } from "grammy"
+import { endsWith, eq, negate } from "lodash/fp"
 import { MyContext } from "#/types/context"
 
 const pluginsDir = join(__dirname, "..", "plugins")
 
 export async function importPlugins(dir?: string, used?: string[]) {
 	const cwd = dir ? join(pluginsDir, dir) : pluginsDir
-	const dirs = (await readdir(cwd)).filter((s) => s !== "use.txt")
+	const dirs = (await readdir(cwd)).filter(negate(eq("use.txt")))
 	used ??= await readUseTxt(cwd)
 
-	const unused = dirs.filter(
-		(dir) => !used!.some((usedDir) => usedDir.endsWith(dir)),
-	)
+	const unused = dirs.filter((dir) => !used!.some(endsWith(dir)))
 	if (unused.length) {
 		const path = join(cwd, "use.txt")
 		throw new Error(`Unused directories at ${path}: ${unused.join(" ")}`)
