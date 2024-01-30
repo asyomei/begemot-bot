@@ -1,0 +1,8 @@
+wrong-button: Эта кнопка не для вас
+
+command-example: |-
+  <b>Помощь:</b>
+  {command}
+
+  <b>Пример:</b>
+  {example}

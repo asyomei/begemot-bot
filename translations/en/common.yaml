@@ -1,0 +1,8 @@
+wrong-button: This button is not for you
+
+command-example: |-
+  <b>Command:</b>
+  {command}
+
+  <b>Example:</b>
+  {example}
