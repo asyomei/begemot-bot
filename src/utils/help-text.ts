@@ -28,6 +28,20 @@ export function cmd(key: string): StringFunction {
 	}
 }
 
+export function args(key: string): StringFunction {
+	const path = ["commands", key, "args"]
+
+	return (lng) => {
+		const args = getI18nResource(lng, path)
+
+		if (!Array.isArray(args) || args.length === 0) {
+			throw new I18nNotFoundError(lng, path, "command args")
+		}
+
+		return args.map((s) => `[${s}]`).join(" ")
+	}
+}
+
 export function desc(key: string): StringFunction {
 	const path = ["commands", key, "description"]
 
