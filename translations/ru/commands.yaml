@@ -24,3 +24,7 @@ admin:
   stats:
     names: [статистика, инфо]
     description: Показать статистику Бегемота
+
+  memory:
+    names: [память]
+    description: Показать потребление памяти

@@ -11,4 +11,6 @@ export const helpText = build`
 
 export const adminHelpText = build`
   ${cmd("admin.stats")} - ${desc("admin.stats")}
+
+  ${cmd("admin.memory")} - ${desc("admin.memory")}
 `
