@@ -49,7 +49,7 @@ export class TransferController extends Controller {
 				amount: args.amount,
 				coins: result.coins,
 			})
-			await ctx.reply(text, { parse_mode: "MarkdownV2" })
+			await ctx.reply(text, { parse_mode: "HTML" })
 			return
 		}
 
