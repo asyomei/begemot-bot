@@ -4,6 +4,7 @@ import { hearsT } from "#/filters/hears-t"
 import { autoReply } from "#/middlewares/auto-reply"
 import { Controller } from "#/plugins/controller"
 import { MyContext } from "#/types/context"
+import { fullName } from "#/utils/full-name"
 import { BAD_RE, GOOD_RE } from "./consts"
 import { RatingService } from "./service"
 
@@ -33,11 +34,9 @@ export class RatingController extends Controller {
 			return
 		}
 
+		const name = await this.service.getUserName(ctx.replyUser.id).then(fullName)
 		const rating = await this.service.changeRating(ctx.replyUser.id, value)
-		const text = ctx.i18n.t("rating.changed", {
-			rating,
-			name: await this.service.getFullName(ctx.replyUser.id),
-		})
+		const text = ctx.i18n.t("rating.changed", { name, rating })
 		await ctx.reply(text)
 	}
 }

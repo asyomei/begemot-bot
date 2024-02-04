@@ -1,6 +1,5 @@
 import { Prisma } from "@prisma/client"
 import { Numeric } from "#/types/numeric"
-import { fullName } from "#/utils/full-name"
 import { RedisStorage } from "#/utils/redis-storage"
 import { DELAY } from "./consts"
 import { RatingSession } from "./session.type"
@@ -21,13 +20,11 @@ export class RatingService {
 		return user.rating
 	}
 
-	async getFullName(userId: Numeric) {
-		const user = await this.prismaUser.findUniqueOrThrow({
+	async getUserName(userId: Numeric) {
+		return await this.prismaUser.findUniqueOrThrow({
 			where: { id: userId },
 			select: { firstName: true, lastName: true },
 		})
-
-		return fullName(user.firstName, user.lastName)
 	}
 
 	async allowRating(userId: Numeric, value: number) {

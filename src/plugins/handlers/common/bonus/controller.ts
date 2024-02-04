@@ -7,7 +7,7 @@ import { Controller } from "#/plugins/controller"
 import { MyContext } from "#/types/context"
 import { Numeric } from "#/types/numeric"
 import { CallbackData } from "#/utils/callback-data"
-import { fullNameBy } from "#/utils/full-name"
+import { fullName } from "#/utils/full-name"
 import { CLOSED_ITEM, ROW } from "./consts"
 import { BonusService } from "./service"
 
@@ -36,7 +36,7 @@ export class BonusController extends Controller {
 		}
 
 		const text = ctx.i18n.t("bonus.text", {
-			name: fullNameBy(ctx.from),
+			name: fullName(ctx.from),
 			attempts: session.attempts,
 			lastIncome: session.lastIncome,
 			incomeTotal: session.incomeTotal,
@@ -69,7 +69,7 @@ export class BonusController extends Controller {
 		const updated = await this.service.update(ctx.from.id, session, pos)
 
 		const text = ctx.i18n.t("bonus.text", {
-			name: fullNameBy(ctx.from),
+			name: fullName(ctx.from),
 			attempts: updated.attempts,
 			lastIncome: updated.lastIncome,
 			incomeTotal: updated.incomeTotal,

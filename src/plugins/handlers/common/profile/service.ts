@@ -1,7 +1,7 @@
 import { Prisma } from "@prisma/client"
 import { ProfileTemplate } from "#/services/profile-template"
 import { Numeric } from "#/types/numeric"
-import { fullNameBy } from "#/utils/full-name"
+import { fullName } from "#/utils/full-name"
 import { Lang } from "#/utils/i18n"
 
 export class ProfileService {
@@ -16,7 +16,7 @@ export class ProfileService {
 		})
 
 		return this.template.user(lng, user.profileTemplate, {
-			name: fullNameBy(user),
+			name: fullName(user),
 			vipStatus: "TODO",
 			messages: user.messages,
 			messagesToRankUp: "TODO",
