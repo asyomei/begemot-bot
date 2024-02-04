@@ -17,6 +17,6 @@ export class ProfileController extends Controller {
 
 	async command(ctx: MyContext & { from: User }) {
 		const profile = await this.service.getProfile(ctx.i18n.lng, ctx.from.id)
-		await ctx.reply(profile, { parse_mode: "HTML" })
+		await ctx.reply(profile)
 	}
 }

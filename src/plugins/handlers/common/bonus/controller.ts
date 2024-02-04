@@ -7,7 +7,6 @@ import { Controller } from "#/plugins/controller"
 import { MyContext } from "#/types/context"
 import { Numeric } from "#/types/numeric"
 import { CallbackData } from "#/utils/callback-data"
-import { escapeHTML } from "#/utils/escape-html"
 import { fullNameBy } from "#/utils/full-name"
 import { CLOSED_ITEM, ROW } from "./consts"
 import { BonusService } from "./service"
@@ -37,13 +36,12 @@ export class BonusController extends Controller {
 		}
 
 		const text = ctx.i18n.t("bonus.text", {
-			name: escapeHTML(fullNameBy(ctx.from)),
+			name: fullNameBy(ctx.from),
 			attempts: session.attempts,
 			lastIncome: session.lastIncome,
 			incomeTotal: session.incomeTotal,
 		})
 		await ctx.reply(text, {
-			parse_mode: "HTML",
 			reply_markup: {
 				inline_keyboard: this.bonusField(
 					ctx.from.id,
@@ -71,14 +69,13 @@ export class BonusController extends Controller {
 		const updated = await this.service.update(ctx.from.id, session, pos)
 
 		const text = ctx.i18n.t("bonus.text", {
-			name: escapeHTML(fullNameBy(ctx.from)),
+			name: fullNameBy(ctx.from),
 			attempts: updated.attempts,
 			lastIncome: updated.lastIncome,
 			incomeTotal: updated.incomeTotal,
 		})
 		await ctx.answerCallbackQuery()
 		await ctx.editMessageText(text, {
-			parse_mode: "HTML",
 			reply_markup: {
 				inline_keyboard: this.bonusField(
 					ctx.from.id,

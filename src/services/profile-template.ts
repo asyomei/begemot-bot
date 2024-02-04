@@ -1,8 +1,5 @@
-import { mapValues } from "lodash"
-import { isString } from "lodash/fp"
-import { escapeHTML } from "#/utils/escape-html"
-import { Lang, TOptionValue, tr } from "#/utils/i18n"
-import { when } from "#/utils/misc"
+import { ValueOf } from "#/types/value-of"
+import { Lang, TOptions, tr } from "#/utils/i18n"
 
 export type UserTOptions = Record<
 	| "name"
@@ -15,7 +12,7 @@ export type UserTOptions = Record<
 	| "duelWins"
 	| "duelTotal"
 	| "placeLabel",
-	TOptionValue
+	ValueOf<TOptions>
 >
 
 export class ProfileTemplate {
@@ -24,7 +21,6 @@ export class ProfileTemplate {
 	}
 
 	user(lng: Lang, template: string, opts: UserTOptions) {
-		const escapedOpts = mapValues(opts, when(isString, escapeHTML))
-		return tr(lng, ["profiles", template, "user"], escapedOpts)
+		return tr(lng, ["profiles", template, "user"], opts)
 	}
 }

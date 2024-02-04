@@ -4,11 +4,11 @@ min-amount: "Minimum amount of coins for transfer: {coins} 🪙"
 not-enough: |-
   There are not enough coins to transfer!
 
-  <b>Needed:</b> {amount} 🪙
-  <b>Your balance:</b> {coins} 🪙
+  {* Needed}: {amount} 🪙
+  {* Your balance}: {coins} 🪙
 
 complete: |-
-  {fromName} <b>successfully</b> transferred {toName} {amount} 🪙
+  {fromName} {* successfully} transferred {toName} {amount} 🪙
 
   {fromName}'s balance: {fromCoins} 🪙
   {toName}'s balance: {toCoins} 🪙

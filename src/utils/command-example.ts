@@ -26,10 +26,10 @@ export function commandExample(
 		? exampleArgs.join(" ")
 		: exampleArgs
 	return tr(lng, "common.command-example", {
-		command: escapeHTML(
-			`${prefix}${command.name} ${command.args.map((s) => `[${s}]`).join(" ")}`,
-		),
-		example: escapeHTML(`${prefix}${command.name} ${example}`),
+		command: `${prefix}${command.name} ${command.args
+			.map((s) => `[${s}]`)
+			.join(" ")}`,
+		example: `${prefix}${command.name} ${example}`,
 	})
 }
 

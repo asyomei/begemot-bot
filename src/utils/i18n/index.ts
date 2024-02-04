@@ -1,11 +1,15 @@
-import { get, mapValues } from "lodash"
+import { get, isString, mapValues } from "lodash"
+import { escapeHTML } from "../escape-html"
+import { when } from "../misc"
 import { compileAll } from "./compiler"
 import { loadDir } from "./loader"
 import { Resource } from "./types"
 
 export type Lang = string | null | undefined
-export type TOptionValue = string | number | bigint | boolean | null | undefined
-export type TOptions = Record<string, TOptionValue>
+export type TOptions = Record<
+	string,
+	string | number | bigint | boolean | null | undefined
+>
 
 const resources = compileAll(loadDir("translations"))
 
@@ -17,6 +21,7 @@ export function getI18nResource(
 	path: string | string[],
 	opts: TOptions = {},
 ): Resource | undefined {
+	opts = escapeOpts(opts)
 	if (Array.isArray(path)) path = path.join(".")
 	if (!(lng && lng in resources)) lng = fallbackLng
 
@@ -53,6 +58,9 @@ function expand(res: any, opts: TOptions): any {
 	if (Array.isArray(res)) return res.map((f) => f(opts))
 	return mapValues(res, (x) => expand(x, opts))
 }
+
+const escapeOpts = (opts: TOptions) =>
+	mapValues(opts, when(isString, escapeHTML))
 
 export class I18nNotFoundError extends Error {
 	constructor(lng: Lang, path: string | string[], what = "resource") {

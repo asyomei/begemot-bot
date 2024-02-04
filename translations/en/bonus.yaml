@@ -4,15 +4,15 @@ no-attempts: Attempts left
 already-opened: This cell is already opened
 
 text: |-
-  🪙 <b>Bonus game</b> 🪙
+  🪙 {* Bonus game} 🪙
 
-  <b>User:</b> {name, nohtml}
+  {* User}: {name}
   {attempts, plural,
     =0 {Attempts left}
-    =1 {<b>One more</b> attempt left}
+    =1 {{* One more} attempt left}
     one {# attempt left}
     other {# attempts left}
   }
 
-  <b>You got:</b> {lastIncome} 🪙
-  <b>Total you got:</b> {incomeTotal} 🪙
+  {* You got}: {lastIncome} 🪙
+  {* Total you got}: {incomeTotal} 🪙

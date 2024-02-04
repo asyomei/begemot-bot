@@ -29,7 +29,7 @@ export class TransferController extends Controller {
 				"transfer",
 				this.cmdArgs.exampleArgs,
 			)
-			await ctx.reply(text, { parse_mode: "HTML" })
+			await ctx.reply(text)
 			return
 		}
 
@@ -49,18 +49,18 @@ export class TransferController extends Controller {
 				amount: args.amount,
 				coins: result.coins,
 			})
-			await ctx.reply(text, { parse_mode: "HTML" })
+			await ctx.reply(text)
 			return
 		}
 
 		const text = ctx.i18n.t("transfer.complete", {
 			amount: args.amount,
-			fromName: escapeHTML(result.from.firstName),
-			toName: escapeHTML(result.to.firstName),
+			fromName: result.from.firstName,
+			toName: result.to.firstName,
 			fromCoins: result.from.coins,
 			toCoins: result.to.coins,
 		})
-		await ctx.reply(text, { parse_mode: "HTML" })
+		await ctx.reply(text)
 	}
 
 	private cmdArgs = new CommandArgs({

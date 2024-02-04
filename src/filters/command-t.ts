@@ -1,5 +1,6 @@
 import { Context } from "grammy"
 import { compact, memoize } from "lodash"
+import { splitOnce } from "#/utils/split-once"
 import { I18nNotFoundError, getI18nResource, languages } from "../utils/i18n"
 
 export interface CommandTFiltered {
@@ -47,9 +48,3 @@ const getCommandChecks = memoize((key: string) => {
 		}),
 	)
 })
-
-function splitOnce(text: string, re: RegExp): [string, string?] {
-	const idx = text.match(re)?.index
-	if (!idx) return [text]
-	return [text.slice(0, idx), text.slice(idx + 1)]
-}
