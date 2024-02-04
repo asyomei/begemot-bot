@@ -3,7 +3,7 @@ import { compact, memoize } from "lodash"
 import { I18nNotFoundError, getI18nResource, languages } from "../utils/i18n"
 
 export interface CommandTFiltered {
-	commandArgs: string[]
+	match: string
 }
 
 export function commandT(key: string) {
@@ -17,13 +17,13 @@ export function commandT(key: string) {
 		const text = ctx.msg?.text
 		if (!text) return false
 
-		const [botCommand, ...args] = compact(text.split(" "))
-		const [command, mention] = botCommand!.split("@")
+		const [botCommand, match] = splitOnce(text, /\s/)
+		const [command, mention] = splitOnce(botCommand, /@/)
 
 		if (mention && mention !== ctx.me.username) return false
 
-		if (commandChecks.some((check) => check(command!))) {
-			;(ctx as C & CommandTFiltered).commandArgs = args
+		if (commandChecks.some((check) => check(command))) {
+			;(ctx as C & CommandTFiltered).match = match?.trim() ?? ""
 			return true
 		}
 
@@ -47,3 +47,9 @@ const getCommandChecks = memoize((key: string) => {
 		}),
 	)
 })
+
+function splitOnce(text: string, re: RegExp): [string, string?] {
+	const idx = text.match(re)?.index
+	if (!idx) return [text]
+	return [text.slice(0, idx), text.slice(idx + 1)]
+}

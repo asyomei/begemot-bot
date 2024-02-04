@@ -1,0 +1,26 @@
+[middlewares]
+drop-sender-chat = true
+auto-retry = true
+throttler = true
+ratelimiter = true
+sequentialize = true
+database-sync = true
+i18n = true
+
+[handlers.admin]
+help = true
+stats = true
+memory = true
+
+[handlers.common]
+rating = true
+start = true
+help = true
+balance = true
+language = true
+bonus = true
+profile = true
+transfer = true
+
+[handlers.other]
+unused-callback = true

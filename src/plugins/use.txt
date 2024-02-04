@@ -1,5 +1,0 @@
-middlewares
-admin
-handlers
-commands
-other

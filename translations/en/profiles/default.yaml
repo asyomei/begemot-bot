@@ -4,7 +4,7 @@ user: |-
   <b>Name:</b> {name}
   <b>Vip Status:</b> {vipStatus}
   <b>Wrote</b> {messages}/{messagesToRankUp} messages
-  <b>Rank:</b> {rank}  Rating: {rating}
+  <b>Rank:</b> {rank}  <b>Rating:</b> {rating}
   <b>Balance:</b> {coins} 🪙
   <b>Duels:</b> {duelWins, plural,
     one {# win}

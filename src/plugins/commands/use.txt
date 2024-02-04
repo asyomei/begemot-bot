@@ -1,7 +1,0 @@
-start
-help
-language
-balance
-bonus
-profile
-transfer

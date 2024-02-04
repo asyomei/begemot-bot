@@ -5,8 +5,13 @@
 			"type": "node",
 			"request": "launch",
 			"name": "Launch bot",
-			"skipFiles": ["<node_internals>/**"],
-			"runtimeArgs": ["-r", "ts-node/register"],
+			"skipFiles": [
+				"<node_internals>/**"
+			],
+			"runtimeArgs": [
+				"-r",
+				"ts-node/register"
+			],
 			"program": "${workspaceFolder}\\src\\main.ts"
 		}
 	]

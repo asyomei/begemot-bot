@@ -8,7 +8,11 @@ export interface HasReplyUserFiltered {
 export function hasReplyUser<C extends MyContext>(
 	ctx: C,
 ): ctx is C & HasReplyUserFiltered {
-	const user = ctx.msg?.reply_to_message?.from
+	const user = getReplyUser(ctx)
 	if (user) (ctx as C & HasReplyUserFiltered).replyUser = user
 	return !!user
+}
+
+export function getReplyUser(ctx: MyContext) {
+	return ctx.msg?.reply_to_message?.from
 }

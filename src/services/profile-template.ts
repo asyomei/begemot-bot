@@ -2,7 +2,7 @@ import { mapValues } from "lodash"
 import { isString } from "lodash/fp"
 import { escapeHTML } from "#/utils/escape-html"
 import { Lang, TOptionValue, tr } from "#/utils/i18n"
-import { when } from "#/utils/lodash-fp"
+import { when } from "#/utils/misc"
 
 export type UserTOptions = Record<
 	| "name"

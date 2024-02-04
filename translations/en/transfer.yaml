@@ -1,5 +1,6 @@
 missing-user: There is no user with this data
 
+min-amount: "Minimum amount of coins for transfer: {coins} 🪙"
 not-enough: |-
   There are not enough coins to transfer!
 
