@@ -4,7 +4,7 @@ no-attempts: Attempts left
 already-opened: This cell is already opened
 
 text: |-
-  🪙 {* Bonus game} 🪙
+  🪙 {/ Bonus game} 🪙
 
   {* User}: {name}
   {attempts, plural,
