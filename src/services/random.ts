@@ -44,9 +44,9 @@ export class RandomService {
 	}
 
 	/** Shuffle array */
-	shuffle<T>(arr: T[], copy = false): T[] {
+	shuffle<A extends any[]>(arr: A, copy = false): A {
 		if (copy) {
-			return this.shuffle(arr.slice())
+			return this.shuffle(arr.slice()) as A
 		}
 
 		for (let i = arr.length - 1; i > 0; i--) {
