@@ -11,3 +11,13 @@ items:
     rating:
       name: Top rated
       template: "{rating} ⭐"
+    duel-wins:
+      name: Top duelists
+      template: |-
+        {duelWins, plural,
+          one {# win}
+          other {# wins}
+        } in {duelTotal, plural,
+          one {# duel}
+          other {# duels}
+        }

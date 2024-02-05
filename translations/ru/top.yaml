@@ -16,3 +16,14 @@ items:
     rating:
       name: Топ рейтинговых
       template: "{rating} ⭐"
+    duel-wins:
+      name: Топ дуэлянтов
+      template: |-
+        {duelWins, plural,
+          one {# победа}
+          few {# победы}
+          other {# побед}
+        } в {duelTotal, plural,
+          one {# дуэли}
+          other {# дуэлях}
+        }

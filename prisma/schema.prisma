@@ -23,5 +23,8 @@ model User {
   rating   Int    @default(0)
   coins    BigInt @default(0) @db.UnsignedBigInt
 
+  duelWins  Int @default(0) @db.UnsignedInt
+  duelTotal Int @default(0) @db.UnsignedInt
+
   profileTemplate String @default("default") @db.VarChar(32)
 }

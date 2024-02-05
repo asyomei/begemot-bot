@@ -23,8 +23,8 @@ export class ProfileService {
 			rank: "TODO",
 			rating: user.rating,
 			coins: user.coins,
-			duelTotal: "TODO",
-			duelWins: "TODO",
+			duelTotal: user.duelTotal,
+			duelWins: user.duelWins,
 			placeLabel: "TODO",
 		})
 	}

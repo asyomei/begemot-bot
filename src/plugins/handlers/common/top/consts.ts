@@ -6,5 +6,8 @@ export const TOP_ITEMS: [string, string][][] = [
 		["user", "messages"],
 		["user", "rating"],
 	],
-	[["user", "coins"]],
+	[
+		["user", "coins"],
+		["user", "duelWins"],
+	],
 ]

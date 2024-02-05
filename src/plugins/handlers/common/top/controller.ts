@@ -1,6 +1,6 @@
 import { Filter, InlineKeyboard } from "grammy"
 import { User } from "grammy/types"
-import { isObject, omitBy } from "lodash"
+import { isObject, kebabCase, omitBy } from "lodash"
 import { commandT } from "#/filters/command-t"
 import { autoReply } from "#/middlewares/auto-reply"
 import { Controller } from "#/plugins/controller"
@@ -64,7 +64,7 @@ export class TopController extends Controller {
 				const name = escapeHTML(fullName(u))
 				const text = tr(
 					ctx.i18n.lng,
-					["top.items.user", field, "template"],
+					["top.items.user", kebabCase(field), "template"],
 					omitBy(u, isObject) as TOptions,
 				)
 				return `${i + 1}. ${name} - ${text}`
@@ -116,7 +116,7 @@ export class TopController extends Controller {
 	private topButtons(lng: Lang, userId: Numeric) {
 		return map2(TOP_ITEMS, ([model, field]) =>
 			InlineKeyboard.text(
-				tr(lng, ["top.items", model, field, "name"]),
+				tr(lng, ["top.items", model, kebabCase(field), "name"]),
 				this.cbData.pack({ model, field, page: 0 }, [userId]),
 			),
 		)
