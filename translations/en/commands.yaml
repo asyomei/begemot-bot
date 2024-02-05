@@ -26,6 +26,10 @@ transfer:
   args: [coins, user tag|id|in reply to message]
   description: Transfer coins to another user
 
+top:
+  names: [top, tops]
+  description: Top List
+
 admin:
   help:
     names: [admin]

@@ -1,0 +1,18 @@
+text: 🏆 Топы
+
+items:
+  user:
+    messages:
+      name: Топ активных
+      template: |-
+        {messages, plural,
+          one {# сообщение}
+          few {# сообщения}
+          other {# сообщений}
+        }
+    coins:
+      name: Топ богатых
+      template: "{coins} 🪙"
+    rating:
+      name: Топ рейтинговых
+      template: "{rating} ⭐"

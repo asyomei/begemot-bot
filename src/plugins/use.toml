@@ -22,6 +22,7 @@ language = true
 bonus = true
 profile = true
 transfer = true
+top = true
 
 [handlers.other]
 unused-callback = true

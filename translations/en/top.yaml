@@ -1,0 +1,13 @@
+text: 🏆 Tops
+
+items:
+  user:
+    messages:
+      name: Top of active
+      template: "{messages, plural, one {# message} other {# messages}}"
+    coins:
+      name: Top of the rich
+      template: "{coins} 🪙"
+    rating:
+      name: Top rated
+      template: "{rating} ⭐"

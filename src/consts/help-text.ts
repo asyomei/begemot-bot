@@ -10,6 +10,8 @@ export const helpText = build`
 
   ${cmd("profile")} - ${desc("profile")}
 
+  ${cmd("top")} - ${desc("top")}
+
   ${cmd("language")} - ${desc("language")}
 `
 
