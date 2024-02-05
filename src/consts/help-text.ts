@@ -8,6 +8,8 @@ export const helpText = build`
 
   ${cmd("slot")} ${args("slot")} - ${desc("slot")}
 
+  ${cmd("duel")} - ${desc("duel")}
+
   ${cmd("transfer")} ${args("transfer")} - ${desc("transfer")}
 
   ${cmd("profile")} - ${desc("profile")}

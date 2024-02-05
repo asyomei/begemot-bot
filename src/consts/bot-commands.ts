@@ -11,6 +11,7 @@ export const botCommands = defineBotCommands(
 		"transfer",
 		"top",
 		"slot",
+		"duel",
 	],
 	["start", "admin"],
 )

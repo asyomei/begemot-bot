@@ -1,0 +1,34 @@
+specify-user: Specify a user for the duel
+
+defeated:
+  first: You are recovering from an unsuccessful duel, {delay, duration} remains
+  second: The enemy is recovering from an unsuccessful duel, {delay, duration} remains
+
+text: |-
+  🔫 {/ Duel} 🔫
+
+  {first}
+  {* versus}
+  {second}
+
+  {action}
+
+  {outcome}
+
+actions:
+  win:
+    - "{winner} shoots and the shot hits {loser}"
+    - "{winner} shoots and a stray bullet hits {loser}"
+    - "{loser} didn't have time to hide from the bullet"
+  draw:
+    - "{a} and {b} shoot, but both miss, eh..."
+    - "{a} and {b} shoot, and... they miss, oh well..."
+
+outcomes:
+  win:
+    - "{winner} wins"
+    - "{winner} survived"
+    - The duelist {loser} was unlucky
+  draw:
+    - Well, you have a draw
+    - It turns out it's a draw, better luck next time

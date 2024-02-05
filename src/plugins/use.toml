@@ -24,6 +24,7 @@ profile = true
 transfer = true
 top = true
 slot = true
+duel = true
 
 [handlers.other]
 unused-callback = true

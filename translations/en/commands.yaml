@@ -35,6 +35,10 @@ slot:
   args: [bet]
   description: Play slot machine
 
+duel:
+  names: [duel]
+  description: Challenge a person to a duel
+
 admin:
   help:
     names: [admin]

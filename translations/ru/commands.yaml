@@ -35,6 +35,10 @@ slot:
   args: [ставка]
   description: Сыграть в слот машину
 
+duel:
+  names: [дуэль]
+  description: Вызвать человека на дуэль
+
 admin:
   help:
     names: [админ]
