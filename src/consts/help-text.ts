@@ -6,6 +6,8 @@ export const helpText = build`
   ${cmd("bonus")} - ${desc("bonus")}
   ${cmd("balance")} - ${desc("balance")}
 
+  ${cmd("slot")} ${args("slot")} - ${desc("slot")}
+
   ${cmd("transfer")} ${args("transfer")} - ${desc("transfer")}
 
   ${cmd("profile")} - ${desc("profile")}

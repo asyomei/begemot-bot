@@ -30,6 +30,11 @@ top:
   names: [топ, топы]
   description: Список топов
 
+slot:
+  names: [слот]
+  args: [ставка]
+  description: Сыграть в слот машину
+
 admin:
   help:
     names: [админ]

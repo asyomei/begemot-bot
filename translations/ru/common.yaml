@@ -9,3 +9,9 @@ command-example: |-
 
   {* Пример}:
   {example}
+
+not-enough-coins: |-
+  Недостаточно монет!
+
+  {* Нужно}: {needed} 🪙
+  {* Баланс}: {coins} 🪙

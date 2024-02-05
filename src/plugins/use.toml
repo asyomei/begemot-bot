@@ -23,6 +23,7 @@ bonus = true
 profile = true
 transfer = true
 top = true
+slot = true
 
 [handlers.other]
 unused-callback = true

@@ -1,0 +1,13 @@
+text: |-
+  🎰 {/ Slot machine} 🎰
+
+  {* User}: {name}
+  {* Bet}: {bet} 🪙
+
+  {row}
+
+  {outcome, select,
+    win {You won {winning} 🪙}
+    other {You lose}
+  }
+  Your balance: {coins} 🪙

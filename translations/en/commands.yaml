@@ -30,6 +30,11 @@ top:
   names: [top, tops]
   description: Top List
 
+slot:
+  names: [slot]
+  args: [bet]
+  description: Play slot machine
+
 admin:
   help:
     names: [admin]
