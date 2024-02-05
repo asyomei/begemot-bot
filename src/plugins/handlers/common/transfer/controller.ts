@@ -5,8 +5,6 @@ import { autoReply } from "#/middlewares/auto-reply"
 import { Controller } from "#/plugins/controller"
 import { MyContext } from "#/types/context"
 import { CommandArgs } from "#/utils/command-args"
-import { commandExample } from "#/utils/command-example"
-import { escapeHTML } from "#/utils/escape-html"
 import { MIN_AMOUNT } from "./consts"
 import { TransferService } from "./service"
 
@@ -24,12 +22,7 @@ export class TransferController extends Controller {
 		const toKey = args?.toKey ?? getReplyUser(ctx)?.id
 
 		if (args?.amount == null || toKey == null) {
-			const text = commandExample(
-				ctx.i18n.lng,
-				"transfer",
-				this.cmdArgs.exampleArgs,
-			)
-			await ctx.reply(text)
+			await ctx.reply(this.cmdArgs.example(ctx.i18n.lng))
 			return
 		}
 
@@ -63,7 +56,7 @@ export class TransferController extends Controller {
 		await ctx.reply(text)
 	}
 
-	private cmdArgs = new CommandArgs({
+	private cmdArgs = new CommandArgs("transfer", {
 		amount: [/([\d']+)/, (s) => BigInt(s!.replaceAll("'", "")), "5'000"],
 		toKey: [/@*(\w+)?$/, (s) => s, "@example_user"],
 	})

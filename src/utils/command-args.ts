@@ -1,4 +1,6 @@
 import { Simplify } from "#/types/simplify"
+import { commandExample } from "./command-example"
+import { Lang } from "./i18n"
 
 type Schema = {
 	[key: string]: [RegExp, (s: string | undefined) => any, string]
@@ -9,7 +11,14 @@ type From<S extends Schema> = Simplify<{
 }>
 
 export class CommandArgs<S extends Schema> {
-	constructor(private schema: S) {}
+	private args
+
+	constructor(
+		private commandKey: string,
+		private schema: S,
+	) {
+		this.args = Object.values(this.schema).map((s) => s[2])
+	}
 
 	parse(match: string): From<S> | null {
 		const data: any = {}
@@ -29,7 +38,7 @@ export class CommandArgs<S extends Schema> {
 		return data
 	}
 
-	get exampleArgs() {
-		return Object.values(this.schema).map((s) => s[2])
+	example(lng: Lang) {
+		return commandExample(lng, this.commandKey, this.args)
 	}
 }
