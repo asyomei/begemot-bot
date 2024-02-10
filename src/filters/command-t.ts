@@ -5,7 +5,7 @@ import { splitOnce } from "#/utils/split-once"
 import { I18nNotFoundError, getI18nResource, languages } from "../utils/i18n"
 
 export interface CommandOptions {
-	getPath?(key: string): string[]
+	getPath?(key: string | string[]): string[]
 	prefixes?: string[]
 }
 
@@ -14,9 +14,9 @@ export interface CommandTFiltered {
 }
 
 export function commandT(
-	key: string,
+	key: string | string[],
 	{
-		getPath = (key) => ["commands", key, "names"],
+		getPath = (key) => ["commands", ...castArray(key), "names"],
 		prefixes = ["/", "!"],
 	}: CommandOptions = {},
 ) {
@@ -44,11 +44,8 @@ export function commandT(
 	}
 }
 
-export const hearsT = (key: string) =>
-	commandT(key, {
-		getPath: (key) => [key],
-		prefixes: [],
-	})
+export const hearsT = (key: string | string[]) =>
+	commandT(key, { getPath: castArray, prefixes: [] })
 
 const getCommandChecks = memoize((path: string[], prefixes: string[]) => {
 	return compact(

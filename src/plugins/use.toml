@@ -27,6 +27,7 @@ top = true
 slot = true
 duel = true
 nya = true
+animal = true
 
 [handlers.other]
 unused-callback = true
