@@ -1,12 +1,12 @@
 import { User } from "grammy/types"
 import { HasReplyUserFiltered, hasReplyUser } from "#/filters/has-reply-user"
-import { hearsT } from "#/filters/hears-t"
 import { autoReply } from "#/middlewares/auto-reply"
 import { Controller } from "#/plugins/controller"
 import { MyContext } from "#/types/context"
 import { fullName } from "#/utils/full-name"
 import { BAD_RE, GOOD_RE } from "./consts"
 import { RatingService } from "./service"
+import { hearsT } from "#/filters/command-t"
 
 export class RatingController extends Controller {
 	constructor(private service: RatingService) {

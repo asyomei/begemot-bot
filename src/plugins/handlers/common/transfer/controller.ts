@@ -58,6 +58,6 @@ export class TransferController extends Controller {
 
 	private cmdArgs = new CommandArgs("transfer", {
 		amount: [/([\d']+)/, (s) => BigInt(s!.replaceAll("'", "")), "5'000"],
-		toKey: [/@*(\w+)?$/, (s) => s, "@example_user"],
+		toKey: [/@*(\w+)?$/, null, "@example_user"],
 	})
 }

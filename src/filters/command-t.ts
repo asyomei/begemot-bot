@@ -1,17 +1,29 @@
 import { Context } from "grammy"
-import { compact, memoize } from "lodash"
+import { castArray, compact, memoize } from "lodash"
+import { eq } from "lodash/fp"
 import { splitOnce } from "#/utils/split-once"
 import { I18nNotFoundError, getI18nResource, languages } from "../utils/i18n"
+
+export interface CommandOptions {
+	getPath?(key: string): string[]
+	prefixes?: string[]
+}
 
 export interface CommandTFiltered {
 	match: string
 }
 
-export function commandT(key: string) {
-	const commandChecks = getCommandChecks(key)
+export function commandT(
+	key: string,
+	{
+		getPath = (key) => ["commands", key, "names"],
+		prefixes = ["/", "!"],
+	}: CommandOptions = {},
+) {
+	const commandChecks = getCommandChecks(getPath(key), prefixes)
 
 	if (commandChecks.length === 0) {
-		throw new I18nNotFoundError("all", ["commands", key, "names"], "commands")
+		throw new I18nNotFoundError("all", getPath(key), "commands")
 	}
 
 	return <C extends Context>(ctx: C): ctx is C & CommandTFiltered => {
@@ -32,18 +44,25 @@ export function commandT(key: string) {
 	}
 }
 
-const getCommandChecks = memoize((key: string) => {
-	const path = ["commands", key, "names"]
+export const hearsT = (key: string) =>
+	commandT(key, {
+		getPath: (key) => [key],
+		prefixes: [],
+	})
 
+const getCommandChecks = memoize((path: string[], prefixes: string[]) => {
 	return compact(
 		languages.map((lng) => {
 			const commands = getI18nResource(lng, path)
 
-			if (!Array.isArray(commands) || commands.length === 0) return null
+			const isArr = Array.isArray(commands) || typeof commands === "string"
+			if (!isArr || commands.length === 0) return null
+			const cmds = castArray(commands)
 
 			return (msgCmd: string) => {
-				const prefix = ["/", "!"].find((p) => msgCmd.startsWith(p))
-				return !!prefix && commands.some((cmd) => msgCmd === prefix + cmd)
+				if (prefixes.length === 0) return cmds.some(eq(msgCmd))
+				const prefix = prefixes.find((p) => msgCmd.startsWith(p))
+				return !!prefix && cmds.some((cmd) => msgCmd === prefix + cmd)
 			}
 		}),
 	)
