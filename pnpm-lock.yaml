@@ -8,6 +8,9 @@ overrides:
   whatwg-url: 13.0.0
 
 dependencies:
+  '@grammyjs/auto-chat-action':
+    specifier: ^0.1.1
+    version: 0.1.1(grammy@1.20.4)
   '@grammyjs/auto-retry':
     specifier: ^1.1.1
     version: 1.1.1
@@ -533,6 +536,14 @@ packages:
     engines: {node: '>=12'}
     dependencies:
       '@jridgewell/trace-mapping': 0.3.9
+
+  /@grammyjs/auto-chat-action@0.1.1(grammy@1.20.4):
+    resolution: {integrity: sha512-70Jdy+keIri4452tluaZpKtHag5gD8pNczoXqajsnsx7pJC5wg3DAQ5unpt0xJb8KsVBAGWuJb298SBl3TVecg==}
+    peerDependencies:
+      grammy: ^1.0.0
+    dependencies:
+      grammy: 1.20.4
+    dev: false
 
   /@grammyjs/auto-retry@1.1.1:
     resolution: {integrity: sha512-vaQDl45Unhidi4r5+JrwDKfmPFJuJpAh9YmE38pACcP3TyKnwUMQxQ3bRdl0Y1ME/uBwTm9YiX1pwol0vnubCw==}

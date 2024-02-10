@@ -7,6 +7,7 @@ sequentialize = true
 database-sync = true
 i18n = true
 parse-mode = true
+auto-chat-action = true
 
 [handlers.admin]
 help = true
