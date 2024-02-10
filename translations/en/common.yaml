@@ -1,4 +1,8 @@
+back: 🔙 Back
+update: 🔄 Update
+
 wrong-button: This button is not for you
+something-wrong: "{/ Something went wrong}"
 
 command-example: |-
   {* Command}:

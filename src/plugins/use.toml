@@ -26,6 +26,7 @@ transfer = true
 top = true
 slot = true
 duel = true
+nya = true
 
 [handlers.other]
 unused-callback = true

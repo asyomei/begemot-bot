@@ -1,0 +1,24 @@
+trigger: nya
+
+more: More
+type: Type
+
+no-type: Nothing
+change-mode: Change mode
+
+types:
+  neko: [neko, meow, cat]
+  kitsune: [kitsune, fox]
+  okami: [okami, woof, wolf]
+  waifu: [waifu, girl]
+  cuddle: [cuddle]
+  kiss: [kiss]
+  pat: [pat]
+  smile: [smile]
+  bite: [bite]
+  kill: [kill]
+  pussy: [pussy]
+  masturbation: [masturbation]
+  yuri: [yuri]
+  trap: [trap]
+  tentacles: [tentacles]

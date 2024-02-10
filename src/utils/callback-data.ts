@@ -65,8 +65,8 @@ export class CallbackData<C extends "public" | "private", S extends Schema> {
 		return mapValues(schema, (parse) => parse(iter.next().value))
 	}
 
-	filter(data?: From<S["default"]>): Predicate
-	filter<T extends keyof S>(type: T, data?: From<S[T]>): Predicate
+	filter(data?: Partial<From<S["default"]>>): Predicate
+	filter<T extends keyof S>(type: T, data?: Partial<From<S[T]>>): Predicate
 	filter(...args: any[]): Predicate {
 		const [type, filterData] =
 			args.length === 2

@@ -2,6 +2,7 @@ back: 🔙 Назад
 update: 🔄 Обновить
 
 wrong-button: Эта кнопка не для вас
+something-wrong: "{/ Что-то пошло не так}"
 
 command-example: |-
   {* Помощь}:
