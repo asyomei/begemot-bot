@@ -8,10 +8,9 @@ export class HelpController extends Controller {
 	constructor() {
 		super()
 
-		const command = this.command.bind(this)
 		this.composer
 			.on("message:text")
-			.filter(commandT("help"), autoReply, command)
+			.filter(commandT("help"), autoReply, (ctx) => this.command(ctx))
 	}
 
 	async command(ctx: MyContext) {

@@ -7,10 +7,9 @@ export class StartController extends Controller {
 	constructor() {
 		super()
 
-		const command = this.command.bind(this)
 		this.composer
 			.on("message:text")
-			.filter(commandT("start"), autoReply, command)
+			.filter(commandT("start"), autoReply, (ctx) => this.command(ctx))
 	}
 
 	async command(ctx: MyContext) {

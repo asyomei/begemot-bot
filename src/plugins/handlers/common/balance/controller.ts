@@ -9,10 +9,9 @@ export class BalanceController extends Controller {
 	constructor(private service: BalanceService) {
 		super()
 
-		const command = this.command.bind(this)
 		this.composer
 			.on("message:text")
-			.filter(commandT("balance"), autoReply, command)
+			.filter(commandT("balance"), autoReply, (ctx) => this.command(ctx))
 	}
 
 	async command(ctx: MyContext & { from: User }) {

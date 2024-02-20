@@ -9,10 +9,9 @@ export class ProfileController extends Controller {
 	constructor(private service: ProfileService) {
 		super()
 
-		const command = this.command.bind(this)
 		this.composer
 			.on("message:text")
-			.filter(commandT("profile"), autoReply, command)
+			.filter(commandT("profile"), autoReply, (ctx) => this.command(ctx))
 	}
 
 	async command(ctx: MyContext & { from: User }) {

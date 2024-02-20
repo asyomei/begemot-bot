@@ -10,9 +10,7 @@ export class StatsController extends AdminController {
 
 		this.composer
 			.on("message:text")
-			.filter(commandT("admin.stats"))
-			.use(autoReply)
-			.use((ctx) => this.command(ctx))
+			.filter(commandT("admin.stats"), autoReply, (ctx) => this.command(ctx))
 	}
 
 	async command(ctx: MyContext) {

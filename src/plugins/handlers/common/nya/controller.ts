@@ -21,12 +21,12 @@ export class NyaController extends Controller {
 		msg.command("sfw", (ctx) => this.changeMode(ctx, "sfw"))
 		msg.command("nsfw", (ctx) => this.changeMode(ctx, "nsfw"))
 
-		cbd
-			.filter(this.cbData.filter({ action: "more" }))
-			.use((ctx) => this.callbackMore(ctx))
-		cbd
-			.filter(this.cbData.filter({ action: "name" }))
-			.use((ctx) => this.callbackName(ctx))
+		cbd.filter(this.cbData.filter({ action: "more" }), (ctx) =>
+			this.callbackMore(ctx),
+		)
+		cbd.filter(this.cbData.filter({ action: "name" }), (ctx) =>
+			this.callbackName(ctx),
+		)
 	}
 
 	async trigger(ctx: MyContext & CommandTFiltered & { from: User }) {

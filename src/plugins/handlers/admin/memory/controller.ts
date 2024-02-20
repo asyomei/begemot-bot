@@ -10,9 +10,7 @@ export class MemoryController extends AdminController {
 
 		this.composer
 			.on("message:text")
-			.filter(commandT("admin.memory"))
-			.use(autoReply)
-			.use((ctx) => this.command(ctx))
+			.filter(commandT("admin.memory"), autoReply, (ctx) => this.command(ctx))
 	}
 
 	async command(ctx: MyContext) {

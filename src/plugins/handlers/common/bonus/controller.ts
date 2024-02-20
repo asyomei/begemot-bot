@@ -15,15 +15,13 @@ export class BonusController extends Controller {
 	constructor(private service: BonusService) {
 		super()
 
-		const command = this.command.bind(this)
 		this.composer
 			.on("message:text")
-			.filter(commandT("bonus"), autoReply, command)
+			.filter(commandT("bonus"), autoReply, (ctx) => this.command(ctx))
 
-		const callbackQuery = this.callbackQuery.bind(this)
 		this.composer
 			.on("callback_query:data")
-			.filter(this.cbData.filter(), callbackQuery)
+			.filter(this.cbData.filter(), (ctx) => this.callbackQuery(ctx))
 	}
 
 	async command(ctx: MyContext & { from: User }) {

@@ -15,13 +15,12 @@ export class RatingController extends Controller {
 			.on("message:text")
 			.filter(hasReplyUser)
 			.filter((ctx) => ctx.from.id !== ctx.replyUser.id)
-			.use(autoReply)
 
-		comp.hears(GOOD_RE, (ctx) => this.hears(ctx, 1))
-		comp.hears(BAD_RE, (ctx) => this.hears(ctx, -1))
+		comp.hears(GOOD_RE, autoReply, (ctx) => this.hears(ctx, 1))
+		comp.hears(BAD_RE, autoReply, (ctx) => this.hears(ctx, -1))
 
-		comp.filter(hearsT("rating.good"), (ctx) => this.hears(ctx, 1))
-		comp.filter(hearsT("rating.bad"), (ctx) => this.hears(ctx, -1))
+		comp.filter(hearsT("rating.good"), autoReply, (ctx) => this.hears(ctx, 1))
+		comp.filter(hearsT("rating.bad"), autoReply, (ctx) => this.hears(ctx, -1))
 	}
 
 	async hears(

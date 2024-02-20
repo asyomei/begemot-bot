@@ -20,19 +20,15 @@ export class TopController extends Controller {
 
 		this.composer
 			.on("message:text")
-			.filter(commandT("top"))
-			.use(autoReply)
-			.use((ctx) => this.command(ctx))
+			.filter(commandT("top"), autoReply, (ctx) => this.command(ctx))
 
 		this.composer
 			.on("callback_query:data")
-			.filter(this.cbData.filter("none"))
-			.use((ctx) => this.callbackQueryNone(ctx))
+			.filter(this.cbData.filter("none"), (ctx) => this.callbackQueryNone(ctx))
 
 		this.composer
 			.on("callback_query:data")
-			.filter(this.cbData.filter())
-			.use((ctx) => this.callbackQuery(ctx))
+			.filter(this.cbData.filter(), (ctx) => this.callbackQuery(ctx))
 	}
 
 	async command(ctx: MyContext & { from: User }) {

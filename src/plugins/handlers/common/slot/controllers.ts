@@ -13,9 +13,7 @@ export class SlotController extends Controller {
 
 		this.composer
 			.on("message:text")
-			.filter(commandT("slot"))
-			.use(autoReply)
-			.use((ctx) => this.command(ctx))
+			.filter(commandT("slot"), autoReply, (ctx) => this.command(ctx))
 	}
 
 	async command(ctx: MyContext & { from: User } & CommandTFiltered) {

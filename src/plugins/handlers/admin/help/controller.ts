@@ -10,9 +10,7 @@ export class AdminHelpController extends AdminController {
 
 		this.composer
 			.on("message:text")
-			.filter(commandT("admin.help"))
-			.use(autoReply)
-			.use((ctx) => this.command(ctx))
+			.filter(commandT("admin.help"), autoReply, (ctx) => this.command(ctx))
 	}
 
 	async command(ctx: MyContext) {

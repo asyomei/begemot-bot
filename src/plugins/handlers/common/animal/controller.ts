@@ -1,4 +1,3 @@
-import { InputFile } from "grammy"
 import { hearsT } from "#/filters/command-t"
 import { autoReply } from "#/middlewares/auto-reply"
 import { Controller } from "#/plugins/controller"
